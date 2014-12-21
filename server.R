@@ -4,19 +4,11 @@ library(shiny)
 library(ggplot2)
 library(Hmisc)
 
-# Define server logic required to draw a histogram
+
 shinyServer(function(input, output) {
-        
-        # Expression that generates a histogram. The expression is
-        # wrapped in a call to renderPlot to indicate that:
-        #
-        #  1) It is "reactive" and therefore should re-execute automatically
-        #     when inputs change
-        #  2) Its output type is a plot
-        
+      
         output$distPlot <- renderPlot({
-                #bins <- seq(min(ch06$START), max(ch06$START), length.out = input$bins + 1)
-                #read your file
+                
                 
                 ch06_2 <- aggregate(sample$snp, 
                                     list(cut2(sample$chromStart, 
@@ -30,12 +22,15 @@ shinyServer(function(input, output) {
         
                 
                 snpDensity_3 <-ggplot(ch06_3, aes(x = Group.1, y = x)) + 
-                        geom_bar(stat="identity") + # pick a binwidth that is not too small 
-                        ggtitle("Density of accross chromosomes") +
-                        xlab("Position in the genome") + 
+                        geom_bar(stat="identity") + 
+                        ggtitle("SNP density of across chromosome") +
+                        xlab("Position in the chromosome") + 
                         ylab("SNP density") + 
-                        theme(axis.text.x=element_text(angle=90, colour = "red", size=8)) +
-                        theme(axis.text.y=element_text(size=10, colour = "black"))  #black and white background
+                        theme(axis.text.x=element_text(angle=90, colour = "blue", size=8)) +
+                        theme(axis.text.y=element_text(size=10, colour = "black")) +
+                        coord_cartesian(ylim=c(input$snp, max(ch06_3$x)))
+                
+                
                 print(snpDensity_3)
         })
         
@@ -47,6 +42,8 @@ shinyServer(function(input, output) {
                                              ))),
                                     FUN = "sum")
                 ch06_3 <- ch06_2[ch06_2$x > input$snp, ]
-                summary(data.frame(ch06_3$x))
+                final_stat <- summary(data.frame(ch06_3$x))
+                colnames(final_stat) <- "summary statistic"
+                print(final_stat)
         })
 })

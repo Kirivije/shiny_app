@@ -15,13 +15,13 @@ shinyUI(fluidPage(
                             "SNP threshold:", 
                             
                             min = 1, 
-                            max = 300 ,
+                            max = 1000 ,
                             value = 6),               
                 
                 br(),
                 br(),
                 
-                textInput("window", "Window size:", "10000"),
+                textInput("window", "Window size:", "100000"),
                 submitButton("Submit")
                 
                 

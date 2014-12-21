@@ -2,30 +2,26 @@
 title: "Introduction"
 output: html_document
 ---
-
+Introduction
+-----------
 It is common in biology to find nucleotide variation in DNA. These results are often given as position on a chromosome where the nucleotide variation is found. This app enables visualizing these data to find where the most variations are found in a given chromosome. 
 
-It is common in biology to find nucleotide variation in DNA. These results are often given as position on a chromosome where the nucleotide variation is found. You can download the position in the human genome where single nucleotide changes (SNP) have happened from the following site.
+You can download the positions in the human genome where single nucleotide changes (SNP) were found  from the following site.
 [Download snp-table from ucsc](http://genome.ucsc.edu/cgi-bin/hgTables?hgsid=325922387&clade=mammal&org=Human&db=hg19&hgta_group=varRep&hgta_track=snp132&hgta_table=0&hgta_regionType=genome&position=chr21:33031597-33041570&hgta_outputType=primaryTable&hgta_outFileName=snp132_ucsc_hg19.bed)
 
-
-This app enables visualizing these data to find where the most variations are found on a given chromosome. 
 Here, we are using a small dataset from the chromosome 1 from the human genome. 
-Input data contains the position of the chromosome. 
+Input data contains the position of the chromosome. (Future impletements will allow use of different datasets.)
 
 How to use the app:
+-------
+1. Set the slider to number to limit the lowest number of SNPs to be shown. Prese "enter". 
+***Note: Please start with a small number. If you put a number that exceed the maximum number of SNPs for that window, graph and summary will not be shown.
 
-1. Set the slider to number to limit the lowest number of SNPs to be shown
+2. Put a number between 1-100000 in text input for “Window size”.  This will determine length of the genomic regions and app will aggregate the number of SNPs in that window. Press "enter". 
 
-2. Put a number between 1-100000 in text input for “Window size”.  This will determine length of the genomic regions and app will aggregate the number of SNPs in that window. 
-
-3. Press enter (For change to occur, you need to press enter for both slider and text entry.) 
+3. ***NOTE:For change to occur, you need to press enter for both slider and text entries.***
 
 4. Go to the “Plot” tab to see the graph showing SNP density for a given window size
 
 5. Go to the “SNP summary” tab to find basic statistics
 
-
-```{r,results='asis'}
-head(sample)
-```
